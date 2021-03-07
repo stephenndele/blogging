@@ -51,7 +51,13 @@ class Blog(db.Model):
     def save_p(self):
         db.session.add(self)
         db.session.commit()
+    
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
 
+    def get_blog(id):
+        blog = Blog.query.filter_by(id=id)
         
     def __repr__(self):
         return f'Blog {self.post}'
@@ -65,6 +71,10 @@ class Comment(db.Model):
 
     def save_c(self):
         db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.remove(self)
         db.session.commit()
 
     @classmethod

@@ -36,8 +36,37 @@ def new_blog():
 
     return render_template('create_blog.html', form = form)
 
+
+@main.route('/blog/<blog_id>/update', methods = ['GET','POST'])
+@login_required
+def updateblog(blog_id):
+    blog = Blog.query.get(blog_id)
+    if blog.user != current_user:
+        abort(403)
+    form = CreateBlog()
+    if form.validate_on_submit():
+        blog.title = form.title.data
+        blog.content = form.content.data
+        db.session.commit()
+        flash("You have updated your Blog!")
+        return redirect(url_for('main.blog',id = blog.id)) 
+    if request.method == 'GET':
+        form.title.data = blog.title
+        form.content.data = blog.content
+    return render_template('newblog.html', form = form)
+
+
 @main.route('/comment/<int:blog_id>', methods = ['POST','GET'])
 @login_required
+
+
+# def comment(blog_id):
+    # blog = Blog.query.get(blog_id)
+    # comment =request.form.get('newcomment')
+    # new_comment = Comment(comment = comment, user_id = current_user._get_current_object().id, blog_id=blog_id)
+    # new_comment.save_c()
+    # return redirect(url_for('main.blog',id = blog.id))
+
 def comment(blog_id):
     form = CommentForm()
     blog = Blog.query.get(blog_id)
