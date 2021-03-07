@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for,abort,request
 from . import main
 from flask_login import login_required,current_user
-from ..models import User,Blog,Comment,Upvote,Downvote
+from ..models import User,Blog,Comment
 from .form import UpdateProfile,BlogForm,CommentForm
 from .. import db,photos
 
@@ -32,7 +32,7 @@ def new_blog():
 @login_required
 def comment(blog_id):
     form = CommentForm()
-    Blog = Blog.query.get(blog_id)
+    blog = Blog.query.get(blog_id)
     all_comments = Comment.query.filter_by(blog_id = blog_id).all()
     if form.validate_on_submit():
         comment = form.comment.data 
@@ -79,34 +79,3 @@ def update_pic(name):
         db.session.commit()
     return redirect(url_for('main.profile',name=name))
 
-@main.route('/like/<int:id>',methods = ['POST','GET'])
-@login_required
-def like(id):
-    get_blog = Upvote.get_upvotes(id)
-    valid_string = f'{current_user.id}:{id}'
-    for blog in get_blogs:
-        to_str = f'{blog}'
-        print(valid_string+" "+to_str)
-        if valid_string == to_str:
-            return redirect(url_for('main.index',id=id))
-        else:
-            continue
-    new_vote = Upvote(user = current_user, blog_id=id)
-    new_vote.save()
-    return redirect(url_for('main.index',id=id))
-
-@main.route('/dislike/<int:id>',methods = ['POST','GET'])
-@login_required
-def dislike(id):
-    blog = Downvote.get_downvotes(id)
-    valid_string = f'{current_user.id}:{id}'
-    for p in blog:
-        to_str = f'{p}'
-        print(valid_string+" "+to_str)
-        if valid_string == to_str:
-            return redirect(url_for('main.index',id=id))
-        else:
-            continue
-    new_downvote = Downvote(user = current_user, blog_id=id)
-    new_downvote.save()
-    return redirect(url_for('main.index',id = id))
