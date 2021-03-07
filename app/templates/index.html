@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+{% import 'macros.html' as macro %}
+
+{% block content %}
+
+    
+        <div  class="container">
+                <h2 class="text-center" id="posts">Welcome to  Blog Home</h2>
+                <!-- <h4 class="text-center" id="post">We give our users an opportunity to pitch their ideas in one minute. This is an opportunity to showcase your creativity to interested investors in shortest time possible.</h4> -->
+            <ul class="nav nav-pills nav-justified nav-fill" role="tablist">
+                <li class="nav-item" >
+                    <a id ="cats" class="nav-link" data-toggle="tab" href="#all"><strong>All Blogs</strong> </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id ="cats" data-toggle="tab" href="#jobs">Job Blogs</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id ="cats" data-toggle="tab" href="#technology">Technology Blogs</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id ="cats"data-toggle="tab" href="#ads">Advert Blogs</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div  class="container tab-pane active" id="all"><br>
+                    {{ macro.display(blogs) }}
+                </div>
+                <div  class="container tab-pane fade" id="technology"><br>
+                    {{ macro.display(technology)}}
+                </div>
+                <div  class="container tab-pane fade" id="jobs"><br>
+                    {{ macro.display(job) }}
+                </div>
+                <div  class="container tab-pane fade" id="ads"><br>
+                    {{ macro.display(advertisement) }}
+                    
+                </div>
+            </div>
+        </div>
+{% endblock%}
