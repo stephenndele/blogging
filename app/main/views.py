@@ -1,9 +1,10 @@
-from flask import render_template, redirect, url_for,abort,request
+from flask import render_template, redirect, url_for,abort,request,flash
 from . import main
 from flask_login import login_required,current_user
-from ..models import User,Blog,Comment
+from ..models import User,Blog,Comment,Subscriber
 from .form import UpdateProfile,BlogForm,CommentForm
 from .. import db,photos
+from ..email import mail_message
 from ..request import get_quotes
 
 @main.route('/')
@@ -29,7 +30,7 @@ def new_blog():
         new_blog_object = Blog(post=post,user_id=current_user._get_current_object().id,category=category,title=title)
         new_blog_object.save_p()
         for subscriber in subscribers:
-            mail_message("New Blog Post","email/new_blog",subscriber.email,blog=blog)
+            mail_message("New Blog Post","email/new_blog",subscriber.email,new_blog_object=new_blog_object)
         return redirect(url_for('main.index'))
         flash('You Posted a new Blog')
 

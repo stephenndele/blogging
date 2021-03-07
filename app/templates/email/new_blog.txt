@@ -1,0 +1,10 @@
+Hello subscriber!
+
+A new blog was posted
+
+Title: {{new_blog_object.title}}
+Post: {{new_blog_object.post|truncate(30)}}
+
+Regards,
+
+Home-Bloger - Stephen Kimondolo
