@@ -1,33 +1,23 @@
+
 {% macro display(blogs) %}
-<div class="container-fluid">
-		<div class="row">
-				{% if blogs %}
-					{% for category in blogs %}
-					<div class="col-md-4" >
-						<div class="thumbnail" id="carded">
-							<h5 class="card-header">{{category.title}}</h5>
-							<div class="card-body">
-									<p>{{category.post}}</p>
-									<p class="text-center"> Category: {{category.category}}</p>
-									<footer > By: {{category.user.username}}</footer>
-								<div><span class="foot" >{{category.comment.count()}} Comments</span> 
-									
-									
-			
-								<a href="{{url_for('main.comment',blog_id = category.id)}}" class="btn btn-info btn-sm"> Comment</a>
-							</div>
-						</div>
-					</div>
-					
-					{% endfor %}
-				{% else %}
-				<div class="card w-90 mb-3">
-					<div class="card-body">
-				
-						<p class="card-title">Category Has 0 posts</p>
-					</div>
-				</div>
-				{% endif %}
-			</div>
+<div class="container">
+<div class="card text-center mb-4" style="margin-bottom:5px">
+	{% if blogs %}
+		{% for category in blogs %}
+	<div class="card-header">
+		{{category.title}}
+	</div>
+	<div class="card-body">
+	  <p class="card-text">{{category.post}}</p>
+	  <p class="card-text">{{category.comment.count()}} Comments</p>
+	  <a href="{{url_for('main.comment',blog_id = category.id)}}" class="btn btn-primary">Comment</a>
+	</div>
+	<div class="card-footer text-muted">
+		By: {{category.user.username}}
+	</div>
+	{% endfor %}
+  </div>
 </div>
-{% endmacro %}
+  {% endif %}
+
+  {% endmacro %}

@@ -8,7 +8,7 @@
     height: 100%;
 }
 
-#cats{
+/* #cats{
     color: white;
     font-size: 18px;
 }
@@ -59,7 +59,6 @@
     color: white;
 }
 #allcomments{
-    /* background-color: rgba(0, 0, 0, 0.589); */
     padding-top: 2%;
     border-radius: 10px;
     height: 100%;
@@ -87,15 +86,30 @@
 i
 #imgform{
     display: none;
+} */
+
+.card-header{
+    color: black;
+}
+
+.card{
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
+}
+
+#posts{
+    color: rgb(255, 255, 255);
+    font-weight: bolder;
+    margin-top: 2%;
+    font-size: 40px;
+    font-family: 'Farro', sans-serif;
 }
 
 
 
 
 
-
-
-.reg{
+/* .reg{
     padding: 20px;
 }
 .account-img {
@@ -159,4 +173,4 @@ i
 .singleblog{
     background-color: rgba(255, 255, 255, 0.924);  
     color: black;
-}
+} */
