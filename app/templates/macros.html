@@ -1,18 +1,19 @@
 
 {% macro display(blogs) %}
 <div class="container">
-<div class="card text-center mb-4" style="margin-bottom:5px">
+<div class="card text-center my-2">
 	{% if blogs %}
 		{% for category in blogs %}
-	<div class="card-header">
+	<div class="card-header my-2" style="background-color: aqua;">
 		{{category.title}}
 	</div>
-	<div class="card-body">
+	<div class="card-body my-2">
 	  <p class="card-text">{{category.post}}</p>
 	  <p class="card-text">{{category.comment.count()}} Comments</p>
-	  <a href="{{url_for('main.comment',blog_id = category.id)}}" class="btn btn-primary">Comment</a>
+	  <a href="{{url_for('main.comment',blog_id = category.id)}}" class="btn btn-sm btn-primary">Comment</a>
+	  <button class="btn btn-sm btn-danger m-1" data-toggle="modal" data-target="#modalConfirmDelete" type="submit">Delete </button>
 	</div>
-	<div class="card-footer text-muted">
+	<div class="card-footer text-muted my-2">
 		By: {{category.user.username}}
 	</div>
 	{% endfor %}
